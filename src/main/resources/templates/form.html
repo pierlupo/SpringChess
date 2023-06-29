@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result Form</title>
+  <head th:insert="~{fragments/head.html :: head}"></head>
+</head>
+<body>
+<header th:insert="~{fragments/header.html :: header}"></header>
+<div class="formContainer">
+  <form th:action="@{/player/submitAddPlayer}" method="post" enctype="multipart/form-data" th:object="${player}">
+    <div class="formul">
+
+      <label class="labelForm" for="nickName">NickName
+        <input type="text" th:field="*{nickName}" class="inputForm" id="nickName" placeholder="" required/></label>
+
+      <label class="labelForm" for="victory">Victories
+        <input type="number" id="victory" class="" th:field="*{victory}" required/></label>
+
+      <label class="labelForm" for="defeat">Defeats
+        <input type="number" class="inputForm" id="defeat" th:field="*{defeat}" required/></label>
+
+      <label class="labelForm" for="pat">Pats
+        <input type="number" class="inputForm" id="pat" th:field="*{pat}" placeholder="" required/></label>
+
+      <label class="labelForm" for="nbrOfGames">Number of Games
+        <input type="number" class="inputForm" id="nbrOfGames" th:field="*{nbrOfGames}" placeholder="" required/></label>
+
+      <label class="labelForm" for="Elo">Elo
+        <input type="number" class="inputForm" id="Elo" th:field="*{elo}" placeholder="" required/></label>
+
+      <input type="hidden" th:field="*{id}" class="inputForm" id="id"/>
+      <button type="submit" class="btnForm">Validation</button>
+    </div>
+  </form>
+</body>
+</html>

@@ -1,0 +1,322 @@
+:root {
+    --black: #333;
+    --blue: #7186FF;
+    --red: #C1272D;
+    --shaded-red: rgb(223, 149, 149);
+    --green: #00751F;
+    --shaded-green : rgb(175, 225, 175);
+    --white: #FFF;
+    --gray: #253237;
+    --grayish: #5C6B73;
+    --timber: #dbd7d2;
+    --yellow: #FFFF00;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+body{
+    background: url("../images/pngtree-chess-pieces-in-silver-on-a-white-chess-board-picture-image_2692106.png ") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/* ***** header nav ***** */
+
+#mainHeader h1{
+    margin: 0 0 0 20px;
+    letter-spacing: 0.2rem;
+    color: var(--shaded-green);
+    font-family: Cantarell, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 1.5em;
+    padding-top: 10px;
+    z-index: 1000;
+}
+
+
+#mainHeader h1:hover{
+    color: var(--green);
+    transition: all 0.5s ease-out;
+}
+
+#mainNav{
+    position: absolute;
+    width: 100%;
+    padding-bottom: 10px;
+
+}
+#mainNav ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    margin-left: 90px;
+    float: right;
+}
+#mainNav a{
+    letter-spacing: 0.2rem;
+    color: var(--shaded-green);
+    text-decoration: none;
+    font-family: Cantarell, Arial, sans-serif;
+    font-size: 1.5em;
+    display: block;
+    margin: 10px;
+    text-transform: uppercase;
+
+}
+#mainNav a:hover{
+    color: var(--green);
+    transition: all 0.5s ease-out;
+}
+
+#mainHeader{
+    display: grid;
+    grid-template-columns: 500px 1fr 1fr;
+}
+
+/* ***** fin header ***** nav*/
+
+/* ***** form login btn input label ***** */
+
+.labelForm{
+    font-family: Cantarell, Arial, sans-serif;
+    font-size: 1em;
+    letter-spacing: 0.2rem;
+    padding: 10px;
+}
+
+.loginForm{
+    font-family: Cantarell, Arial, sans-serif;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top:200px;
+    width:20rem;
+    padding:20px;
+    background-color: var(--black);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid;
+
+}
+
+.inputlog{
+    margin-bottom:20px;
+    width: 250px;
+    font-family: Cantarell, Arial, sans-serif;
+}
+
+.btnlog{
+    font-family: Cantarell, Arial, sans-serif;
+    cursor:pointer;
+    border-radius: 1rem;
+    border: none;
+    height: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 250px;
+    background-color: var(--white);
+    color: var(--black);
+}
+
+input{
+    border: none;
+    border-radius: 1rem;
+    height: 40px;
+}
+
+
+/* ***** fin form login btn ***** */
+
+/* ***** profile details ***** */
+
+.containerDetails{
+    margin-left: auto;
+    margin-right: auto;
+    width: 20rem;
+    font-family: Cantarell, Arial, sans-serif;
+}
+
+.headerBox{
+    font-size: 22px;
+    text-transform: capitalize;
+}
+
+.detailBox{
+    font-family: Cantarell, Arial, sans-serif;
+    background-color: var(--black);
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid;
+    color:var(--white);
+    border-radius: 1rem;
+    text-align: center;
+    margin-top:200px;
+}
+
+.IsInTournament{
+    font-weight: normal;
+}
+
+.changeIsInTournament{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+.divChangeIsInTournament{
+    margin: 10px;
+    padding: 20px;
+}
+
+.green{
+    color: var(--green);
+}
+
+.red{
+    color:var(--red);
+}
+
+.linkBack{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+/* ***** fin profile details ***** */
+
+/* ***** form ***** */
+
+.formul{
+    margin-left: auto;
+    margin-right: auto;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    text-align: center;
+}
+
+.labelForm{
+    font-family: Cantarell, Arial, sans-serif;
+    font-size: 1em;
+    letter-spacing: 0.2rem;
+    padding: 10px;
+    color: var(--shaded-green);
+}
+
+.btnForm{
+    padding: 10px;
+    margin-top: 10px;
+    cursor:pointer;
+}
+
+.formContainer{
+    margin-top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    width:60rem;
+    font-family: Cantarell, Arial, sans-serif;
+    font-size: 1.5em;
+    letter-spacing: 0.2rem;
+}
+
+.btnForm{
+    padding: 10px;
+    margin-top: 10px;
+    cursor:pointer;
+}
+
+/*home player*/
+
+.linkForm{
+    text-align: center;
+}
+
+.conteneur{
+    margin-left: auto;
+    margin-right: auto;
+    width:20rem;
+    padding: 10px;
+}
+
+td a {
+    text-decoration: none;
+    color:var(--white);
+}
+
+tr{
+    text-align: center;
+    height: 40px;
+
+}
+
+/*fin home player*/
+
+.btnSearch{
+    font-family: Cantarell, Arial, sans-serif;
+    cursor:pointer;
+    border-radius: 1rem;
+    border: none;
+    height: 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: var(--black);
+    color: var(--white);
+    display: inline-block;
+    width: 130px;
+}
+
+.btnSearch:hover{
+    background-color: var(--white);
+    color: var(--black);
+    transition: all 0.5s ease-out;
+}
+
+.btnEdit{
+    font-family: Cantarell, Arial, sans-serif;
+    cursor:pointer;
+    border-radius: 1rem;
+    border: none;
+    height: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-table;
+    width:60px;
+}
+.btnEdit:hover{
+    color: var(--yellow);
+    transition: all 0.5s ease-out;
+}
+.btnDelete{
+    font-family: Cantarell, Arial, sans-serif;
+    cursor:pointer;
+    border-radius: 1rem;
+    border: none;
+    height: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btnDelete:hover{
+    color: var(--red);
+    transition: all 0.5s ease-out;
+}
+
+table{
+    margin-right: auto;
+    margin-left: auto;
+    width:60rem;
+}

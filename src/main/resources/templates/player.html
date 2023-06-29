@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <head th:insert="~{fragments/head.html :: head}"></head>
+</head>
+<body class="img">
+<header th:insert="~{fragments/header.html :: header}"></header>
+<table class = "table1" >
+    <thead>
+    <tr>
+        <th>Nickname</th>
+        <th>victory</th>
+        <th>defeat</th>
+        <th>pat</th>
+        <th>elo</th>
+        <th>registered</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="player : ${players}">
+        <td th:text="${player.nickName}"></td>
+        <td th:text="${player.victory}"></td>
+        <td th:text="${player.defeat}"></td>
+        <td th:text="${player.pat}"></td>
+        <td th:text="${player.elo}"></td>
+        <td th:text="${player.IsInTournament == false} ? 'Not registered' : 'registered'" th:class="${player.IsInTournament == false} ? 'red' : 'green'">></td>
+        <td><a th:href="@{/player/edit/{id}(id=${player.id})}" class="btnEdit"> edit </a></td><td><a class="btnDelete" th:href="@{/player/delete/{id}(id=${player.id})}"> delete </a></td>
+    </tr>
+    </tbody>
+</table>
+<hr>
+<div class="conteneur">
+    <form th:action="@{/player/search}" method="get">
+        <label>
+            <input type="text" name="playerId" placeholder="Enter an ID">
+        </label>
+        <button type="submit" class="btnSearch">Search</button>
+    </form>
+    <hr>
+    <div class="linkForm">
+        <a th:href="@{/player/form}" class="linkAdd"> Add a player </a>
+    </div>
+    <hr>
+</div>
+</div>
+</body>
+</html>

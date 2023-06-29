@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <head th:insert="~{fragments/head.html :: head}"></head>
+</head>
+<body>
+<header th:insert="~{fragments/header.html :: header}"></header>
+<form th:action="@{/user/signin}" method="post" class="loginForm">
+<!--    <div th:if="${message != null}" class="">-->
+<!--        <div class="">-->
+<!--            <div th:text="${message}"></div>-->
+<!--        </div>-->
+        <div>
+            <label class="labelForm" for="nickname">
+            <input type="text" name="nickName" placeholder="Nickname" id="nickname" class="inputlog"/>
+            </label>
+        </div>
+        <div>
+            <label class="labelForm" for="password">
+            <input type="password" name="password" placeholder="Password" id="password" class="inputlog"/>
+            </label>
+        </div>
+        <div>
+            <button class="btn btnlog">valider</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

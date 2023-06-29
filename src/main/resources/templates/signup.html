@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <head th:insert="~{fragments/head.html :: head}"></head>
+</head>
+<body>
+<header th:insert="~{fragments/header.html :: header}"></header>
+<form th:action="@{/user/signup}" method="post" class="loginForm">
+<!--  <div th:if="${message != null}" class="">-->
+<!--    <div class="">-->
+<!--      <div th:text="${message}"></div>-->
+<!--    </div>-->
+  </div>
+  <div class="">
+    <label class="labelForm" for="firstname">
+    <input type="text" name="firstName" placeholder="Firstname" id="firstname" class="inputlog">
+    </label>
+  </div>
+  <div class="">
+    <label class="labelForm" for="lastname">
+    <input type="text" name="lastName" placeholder="Lastname" id="lastname" class="inputlog">
+    </label>
+  </div>
+  <div class="">
+    <label class="labelForm" for="nickname">
+    <input type="text" name="nickName" placeholder="Nickname" id="nickname" class="inputlog">
+    </label>
+  </div>
+  <div class="">
+    <label class="labelForm" for="email">
+    <input type="text" name="email" placeholder="Email" id="email" class="inputlog">
+    </label>
+  </div>
+  <div class="">
+    <label class="labelForm" for="password">
+    <input type="password" name="password" placeholder="Password" id="password" class="inputlog">
+    </label>
+  </div>
+  <button class="btn btnlog">valider</button>
+  </div>
+</form>
+</body>
+</html>
