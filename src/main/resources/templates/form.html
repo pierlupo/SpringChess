@@ -11,8 +11,8 @@
   <form th:action="@{/player/submitAddPlayer}" method="post" enctype="multipart/form-data" th:object="${player}">
     <div class="formul">
 
-      <label class="labelForm" for="nickName">NickName
-        <input type="text" th:field="*{nickName}" class="inputForm" id="nickName" placeholder="" required/></label>
+      <label class="labelForm" for="userName">Username
+        <input type="text" th:field="*{userName}" class="inputForm" id="userName" placeholder="" required/></label>
 
       <label class="labelForm" for="victory">Victories
         <input type="number" id="victory" class="" th:field="*{victory}" required/></label>

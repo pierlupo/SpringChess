@@ -1,10 +1,7 @@
 package com.chess.controller;
 
 import com.chess.entity.Player;
-import com.chess.exception.EmptyFieldsException;
-import com.chess.exception.NotSignedInException;
-import com.chess.exception.PlayerDoesNotExistException;
-import com.chess.exception.PlayerExistsException;
+import com.chess.exception.*;
 import com.chess.service.LoginService;
 import com.chess.service.PlayerService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,31 +24,78 @@ public class PlayerController {
     private HttpServletResponse response;
 
     @Autowired
-    private LoginService ISessionLoginservice;
+    private LoginService loginservice;
+    @GetMapping("/signin")
+    public ModelAndView signIn(){
+        ModelAndView mv = new ModelAndView("signin");
+        return mv;
+    }
 
-    @GetMapping("")
+    @PostMapping("/signin")
+    public ModelAndView postSignIn(@RequestParam String userName, @RequestParam String password) throws PlayerDoesNotExistException, IOException, NotSignedInException {
+//        if(playerService.signIn(email, password)) {
+//            return "redirect:/player/form";}
+//
+//        return null;
+//    }
+        if (playerService.signIn(userName, password)) {
+            response.sendRedirect("/player/form");
+        }
+            ModelAndView mv = new ModelAndView("signin");
+            return mv;
+        }
+
+    @ExceptionHandler(PlayerDoesNotExistException.class)
+    public ModelAndView handleOPlayerDoesNotExist(PlayerDoesNotExistException ex) throws IOException {
+        ModelAndView mv = new ModelAndView("signin");
+        mv.addObject("message", ex.getMessage());
+        return mv;
+    }
+    @GetMapping("/signup")
+    public ModelAndView postSignIn() {
+        ModelAndView mv = new ModelAndView("signup");
+        return mv;
+    }
+
+    @PostMapping("/signup")
+    public String postSignUp(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String userName,@RequestParam String email, @RequestParam String password) throws IOException, PlayerExistsException {
+        if(playerService.signUp(firstName, lastName, userName, email, password)) {
+            return "redirect:/player/signin";
+        }
+        return null;
+    }
+    @ExceptionHandler(PlayerExistsException.class)
+    public ModelAndView handlePlayerExists(PlayerExistsException ex) {
+        ModelAndView mv = new ModelAndView("signup");
+        mv.addObject("message", ex.getMessage());
+        return mv;
+    }
+
+
+
+    @GetMapping("/get")
     public ModelAndView get() throws NotSignedInException {
-        ModelAndView mv = new ModelAndView("form");
+        ModelAndView mv = new ModelAndView("home");
         mv.addObject("players", playerService.getPlayers());
         return mv;
     }
 
     @GetMapping("/add")
     public ModelAndView formAddPlayer() throws IOException {
-//        if(!ISessionLoginservice.isLogged()) {
-//            response.sendRedirect("/user/signin");
-//        }
+        if(!loginservice.isLogged()) {
+            response.sendRedirect("/player/signin");
+        }
         ModelAndView mv =new ModelAndView("form");
         mv.addObject("player", new Player());
         return mv;
     }
 
     @PostMapping("/Add")
-    public String  submitAddPlayer(@RequestParam String nickName, @RequestParam int victory, @RequestParam int defeat, @RequestParam int pat, @RequestParam int nbrOfGames, @RequestParam int Elo) throws NotSignedInException, PlayerExistsException, EmptyFieldsException, IOException {
-//        if(!ISessionLoginservice.isLogged()) {
-//            response.sendRedirect("/user/signin");
-//        }
-        if(playerService.savePlayer(nickName, victory, defeat, pat, nbrOfGames, Elo)){
+    public String  submitAddPlayerStats(@RequestParam String userName, @RequestParam int victory, @RequestParam int defeat, @RequestParam int pat, @RequestParam int nbrOfGames, @RequestParam int Elo) throws NotSignedInException, PlayerExistsException, EmptyFieldsException, IOException {
+        if(!loginservice.isLogged()) {
+            response.sendRedirect("/player/signin");
+        }
+        if(playerService.savePlayerStats(userName, victory, defeat, pat, nbrOfGames, Elo)){
             return "redirect:/player";
         }
         return null;
@@ -59,20 +103,20 @@ public class PlayerController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView formEditPlayer(@PathVariable int id) throws NotSignedInException, PlayerDoesNotExistException, IOException {
-//        if(!ISessionLoginservice.isLogged()) {
-//            response.sendRedirect("/user/signin");
-//        }
+        if(!loginservice.isLogged()) {
+            response.sendRedirect("/player/signin");
+        }
         ModelAndView mv = new ModelAndView("form");
         mv.addObject("player", playerService.getPlayerById(id));
         return mv;
     }
 
     @PostMapping("/edit/{id}")
-    public String submitFormEditPlayer(@RequestParam String nickName, @RequestParam int victory, @RequestParam int defeat, @RequestParam int pat, @RequestParam int nbrOfGames, @RequestParam int Elo) throws NotSignedInException, PlayerDoesNotExistException, EmptyFieldsException, PlayerExistsException, IOException {
-//        if(!ISessionLoginservice.isLogged()) {
-//            response.sendRedirect("/user/signin");
-//        }
-        if(playerService.updatePlayer(nickName, victory, defeat, pat, nbrOfGames, Elo)){
+    public String submitFormEditPlayer(@RequestParam String userName, @RequestParam int victory, @RequestParam int defeat, @RequestParam int pat, @RequestParam int nbrOfGames, @RequestParam int Elo) throws NotSignedInException, PlayerDoesNotExistException, EmptyFieldsException, PlayerExistsException, IOException {
+        if(!loginservice.isLogged()) {
+            response.sendRedirect("/player/signin");
+        }
+        if(playerService.updatePlayerStats(userName, victory, defeat, pat, nbrOfGames, Elo)){
             return "redirect:/profile";
         }
         return null;
@@ -80,8 +124,8 @@ public class PlayerController {
 
     @GetMapping("/form")
     public ModelAndView getForm() throws IOException {
-//        if(!ISessionLoginservice.isLogged()) {
-//            response.sendRedirect("/user/signin");
+//        if(!loginservice.isLogged()) {
+//            response.sendRedirect("/player/signin");
 //        }
         ModelAndView mv = new ModelAndView("form");
         mv.addObject("player", new Player());
@@ -90,9 +134,9 @@ public class PlayerController {
 
     @GetMapping("/delete/{id}")
     public boolean delete(@PathVariable Integer id) throws Exception {
-//        if(!ISessionLoginservice.isLogged()) {
-//            response.sendRedirect("/user/login");
-//        }
+        if(!loginservice.isLogged()) {
+            response.sendRedirect("/player/signin");
+        }
         return playerService.deletePlayer(id);
     }
 
@@ -101,20 +145,6 @@ public class PlayerController {
         Player player = playerService.getPlayerById(playerId);
         model.addAttribute("player", player);
         return "playerdetails";
-    }
-
-    @ExceptionHandler(PlayerDoesNotExistException.class)
-    public ModelAndView handleUserDoesNotExist(PlayerDoesNotExistException ex) {
-        ModelAndView mv = new ModelAndView("signin");
-        mv.addObject("message", ex.getMessage());
-        return mv;
-    }
-
-    @ExceptionHandler(PlayerExistsException.class)
-    public ModelAndView handleUserExists(PlayerExistsException ex) {
-        ModelAndView mv = new ModelAndView("signup");
-        mv.addObject("message", ex.getMessage());
-        return mv;
     }
     @ExceptionHandler(NotSignedInException.class)
     public ModelAndView handleException(NotSignedInException ex) {

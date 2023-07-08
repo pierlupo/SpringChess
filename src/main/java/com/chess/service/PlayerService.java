@@ -12,18 +12,39 @@ import java.util.List;
 @Service
 public class PlayerService {
 
-
     @Autowired
     private PlayerRepository playerRepository;
 
     @Autowired
     private LoginService loginService;
 
-    public boolean savePlayer(String nickName, int victory, int defeat, int pat, int nbrOfGames, int elo) throws PlayerExistsException, EmptyFieldsException, NotSignedInException {
+    public boolean signUp(String firstName, String lastName, String userName, String email, String password) throws PlayerExistsException {
+        try {
+            playerRepository.findByUserName(userName);
+            throw new PlayerExistsException();
+        }
+        catch (Exception ex) {
+            Player player = Player.builder().firstName(firstName).lastName(lastName).userName(userName).email(email).password(password).build();
+            playerRepository.save(player);
+            return player.getId() > 0;
+        }
+    }
+
+    public boolean signIn(String userName, String password) throws PlayerDoesNotExistException {
+        try {
+            Player player = playerRepository.findByUserNameAndPassword(userName, password);
+            return loginService.login(player);
+        } catch (Exception ex) {
+            throw new PlayerDoesNotExistException();
+        }
+
+    }
+
+    public boolean savePlayerStats(String userName, int victory, int defeat, int pat, int nbrOfGames, int elo) throws PlayerExistsException, EmptyFieldsException, NotSignedInException {
         if(loginService.isLogged()) {
                 if(nbrOfGames > 0) {
                     if(!playerRepository.existsBynbrOfGames(nbrOfGames)) {
-                        Player player = Player.builder().nickName(nickName).victory(victory).defeat(defeat).pat(pat).elo(elo).build();
+                        Player player = Player.builder().userName(userName).victory(victory).defeat(defeat).pat(pat).elo(elo).build();
                         playerRepository.save(player);
                         return player.getId() > 0;
                     }
@@ -35,13 +56,15 @@ public class PlayerService {
         throw new NotSignedInException();
     }
 
-    public boolean updatePlayer(String nickName, int victory, int defeat, int pat, int nbrOfGames, int Elo) throws PlayerExistsException, EmptyFieldsException, NotSignedInException, PlayerDoesNotExistException
+
+
+    public boolean updatePlayerStats(String userName, int victory, int defeat, int pat, int nbrOfGames, int Elo) throws  EmptyFieldsException, NotSignedInException, PlayerDoesNotExistException
     {
         if(loginService.isLogged()) {
                 if(nbrOfGames > 0) {
                     try {
                         Player player = playerRepository.findByNbrOfGames(nbrOfGames);
-                        player.setNickName(nickName);
+                        player.setUserName(userName);
                         player.setVictory(victory);
                         player.setDefeat(defeat);
                         player.setPat(pat);

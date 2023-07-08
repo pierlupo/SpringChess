@@ -7,11 +7,11 @@
 </head>
 <body>
 <header th:insert="~{fragments/header.html :: header}"></header>
-<form th:action="@{/user/signup}" method="post" class="loginForm">
-<!--  <div th:if="${message != null}" class="">-->
-<!--    <div class="">-->
-<!--      <div th:text="${message}"></div>-->
-<!--    </div>-->
+<form th:action="@{/player/signup}" method="post" class="loginForm">
+  <div th:if="${message != null}" class="messageContainer">
+    <div class="messageText">
+      <div th:text="${message}"></div>
+    </div>
   </div>
   <div class="">
     <label class="labelForm" for="firstname">
@@ -24,8 +24,8 @@
     </label>
   </div>
   <div class="">
-    <label class="labelForm" for="nickname">
-    <input type="text" name="nickName" placeholder="Nickname" id="nickname" class="inputlog">
+    <label class="labelForm" for="userName">
+    <input type="text" name="userName" placeholder="Username" id="userName" class="inputlog">
     </label>
   </div>
   <div class="">

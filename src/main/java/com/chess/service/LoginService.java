@@ -1,13 +1,13 @@
 package com.chess.service;
 
-import com.chess.entity.AppUser;
+import com.chess.entity.Player;
 
 
 public interface LoginService {
 
-    public boolean login(AppUser appUser);
+    public boolean login(Player player);
 
     public boolean isLogged();
 
-    public int getUserId();
+    public int getPlayerId();
 }

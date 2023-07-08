@@ -1,6 +1,6 @@
 package com.chess.service.impl;
 
-import com.chess.entity.AppUser;
+import com.chess.entity.Player;
 import com.chess.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ public class ISessionLoginService implements LoginService {
     HttpSession httpSession;
 
     @Override
-    public boolean login(AppUser appUser) {
+    public boolean login(Player player) {
         httpSession.setAttribute("isLogged", true);
-        httpSession.setAttribute("fullName", appUser.getFirstName()+" "+appUser.getLastName());
-        httpSession.setAttribute("userId", appUser.getId());
+        httpSession.setAttribute("fullName", player.getFirstName()+" "+player.getLastName());
+        httpSession.setAttribute("playerId", player.getId());
         return true;
     }
 
@@ -26,8 +26,8 @@ public class ISessionLoginService implements LoginService {
     }
 
     @Override
-    public int getUserId() {
-            return (int)httpSession.getAttribute("userId");
+    public int getPlayerId() {
+            return (int)httpSession.getAttribute("playerId");
         }
     }
 
