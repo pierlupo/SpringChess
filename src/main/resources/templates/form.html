@@ -7,6 +7,10 @@
 </head>
 <body>
 <header th:insert="~{fragments/header.html :: header}"></header>
+<div class="background">
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
 <div class="formContainer">
   <form th:action="@{/player/submitAddPlayer}" method="post" enctype="multipart/form-data" th:object="${player}">
     <div class="formul">

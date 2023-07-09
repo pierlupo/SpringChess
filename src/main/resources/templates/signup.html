@@ -7,6 +7,10 @@
 </head>
 <body>
 <header th:insert="~{fragments/header.html :: header}"></header>
+<div class="background">
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
 <form th:action="@{/player/signup}" method="post" class="loginForm">
   <div th:if="${message != null}" class="messageContainer">
     <div class="messageText">
