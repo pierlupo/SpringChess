@@ -156,7 +156,7 @@ public class PlayerController {
             response.sendRedirect("/player/signin");
         }
         if(playerService.updatePlayerStats(userName, victory, defeat, pat, nbrOfGames, Elo)){
-            return "redirect:/profile";
+            return "redirect:/player";
         }
         return null;
     }

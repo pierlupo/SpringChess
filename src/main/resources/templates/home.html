@@ -10,6 +10,11 @@
 <div class="conteneur">
     <div class="shapeHome shapeHome1"></div>
     <div class="shapeHome shapeHome2"></div>
+    <div th:if="${message != null}" class="messageContainer">
+        <div class="messageText">
+            <div th:text="${message}"></div>
+        </div>
+    </div>
     <table class = "table1" >
         <thead>
         <tr>
@@ -34,6 +39,18 @@
             <td><a th:href="@{/player/edit/{id}(id=${player.id})}" class="btnEdit"> edit </a></td><td><a class="btnDelete" th:href="@{/player/delete/{id}(id=${player.id})}"> delete </a></td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a th:href="@{/player/form}" class="linkAdd"> Add a player </a></td>
+        </tr>
+        </tfoot>
     </table>
     <div class="searchConteneur">
     <form class="searchForm" th:action="@{/player/search}" method="get">
@@ -43,9 +60,6 @@
         </label>
         <button type="submit" class="btnSearch">Search</button>
     </form>
-        <div class="">
-            <a th:href="@{/player/form}" class=""> Add a player </a>
-        </div>
     </div>
 
 </div>

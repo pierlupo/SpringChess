@@ -7,6 +7,10 @@
 <body>
 <header th:insert="~{fragments/header.html :: header}"></header>
 <div class="containerDetails">
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
     <div class="detailBox">
         <div class="headerBox" th:text="${player?.userName}">
             <hr>
@@ -22,9 +26,9 @@
 <!--            <h3 class="IsInTournament" th:text="${player?.IsInTournament == false  ? 'Not registered' : 'registered'}" th:class="${player.IsInTournament == false} ? 'red' : 'green'"></h3>-->
         </div>
         <div class="divChangeIsInTournament">
-            <a class="changeIsInTournament" th:href="@{/player/update/{id}(id=${player.getId()})}"> registrate</a>
+            <a class="changeIsInTournament" th:href="@{/player/update/{id}(id=${player.getId()})}"> > registrate < </a>
         </div>
-        <a href="#" class="linkBack" th:href="${'/player'}">Retour</a>
+        <a href="#" class="linkBack" th:href="${'/player'}"> > Retour < </a>
     </div>
 </div>
 </body>

@@ -37,12 +37,7 @@ body{
     padding-top: 10px;
     z-index: 1000;
     text-transform: uppercase;
-}
-
-
-#mainHeader h1:hover{
-    color: var(--black);
-    transition: all 0.5s ease-out;
+    width: 400px;
 }
 
 #mainNav{
@@ -56,9 +51,22 @@ body{
     padding: 0;
     margin: 0;
     display: flex;
-    margin-left: 90px;
-    float: right;
+    margin-left: 150px;
+    /*float: right;*/
+    justify-content: center;
 }
+
+.homeTitle{
+    text-decoration: none;
+    cursor: pointer;
+    color:var(--white);
+}
+
+.homeTitle:hover{
+    color: var(--black);
+    transition: all 0.5s ease-out;
+}
+
 #mainNav a{
     letter-spacing: 0.2rem;
     color: var(--black);
@@ -127,8 +135,8 @@ body{
             #FFF,
             #333
     );
-    left: -80px;
-    top: -80px;
+    right: 0px;
+    top: 0px;
 }
 .shapeHome2{
     background: linear-gradient(
@@ -136,8 +144,8 @@ body{
             #333,
             #000
     );
-    right: -30px;
-    bottom: -80px;
+    left: 0px;
+    top: 0px;
 }
 .signinForm{
     /*height: 520px;*/
@@ -315,17 +323,28 @@ button{
 }
 
 .detailBox{
-    font-family: Cantarell, Arial, sans-serif;
-    background-color: var(--black);
-    padding:20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid;
+    /*font-family: Cantarell, Arial, sans-serif;*/
+    /*background-color: var(--black);*/
+    /*padding:20px;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*border: 1px solid;*/
     color:var(--white);
-    border-radius: 1rem;
+    /*border-radius: 1rem;*/
     text-align: center;
-    margin-top:200px;
+    /*margin-top:200px;*/
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
 }
 
 .IsInTournament{
@@ -361,13 +380,11 @@ button{
     font-weight: bolder;
 }
 
-
 .linkAdd{
-    text-decoration: none;
-    color:var(--black);
-    text-transform: uppercase;
-    font-family: Cantarell, Arial, sans-serif;
-
+    display: block ruby;
+    width:0px;
+    padding: 10px;
+    font-weight: bold;
 }
 /* ***** fin profile details ***** */
 
