@@ -440,6 +440,11 @@ td a {
     color:var(--white);
 }
 
+td{
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
 
 
 tr{

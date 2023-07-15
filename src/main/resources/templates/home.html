@@ -10,11 +10,6 @@
 <div class="conteneur">
     <div class="shapeHome shapeHome1"></div>
     <div class="shapeHome shapeHome2"></div>
-    <div th:if="${message != null}" class="messageContainer">
-        <div class="messageText">
-            <div th:text="${message}"></div>
-        </div>
-    </div>
     <table class = "table1" >
         <thead>
         <tr>
@@ -35,7 +30,7 @@
             <td th:text="${player.defeat}"></td>
             <td th:text="${player.pat}"></td>
             <td th:text="${player.elo}"></td>
-            <td th:text="${player.isInTournament == false} ? 'Not registered' : 'registered'" th:class="${player.isInTournament == false} ? 'red' : 'green'">></td>
+            <td th:text="${player.isInTournament == false} ? 'NOT REGISTERED' : 'REGISTERED'" th:class="${player.isInTournament == false} ? 'red' : 'green'"></td>
             <td><a th:href="@{/player/edit/{id}(id=${player.id})}" class="btnEdit"> edit </a></td><td><a class="btnDelete" th:href="@{/player/delete/{id}(id=${player.id})}"> delete </a></td>
         </tr>
         </tbody>
@@ -48,12 +43,17 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><a th:href="@{/player/form}" class="linkAdd"> Add a player </a></td>
+            <td><a th:href="@{/player/signup}" class="linkAdd"> Add a player </a></td>
         </tr>
         </tfoot>
     </table>
     <div class="searchConteneur">
     <form class="searchForm" th:action="@{/player/search}" method="get">
+        <div th:if="${message != null}" class="messageContainer">
+            <div class="messageText">
+                <div th:text="${message}"></div>
+            </div>
+        </div>
         <h3>Search for a player</h3>
         <label>
             <input type="text" name="playerId" placeholder="Enter an ID">
