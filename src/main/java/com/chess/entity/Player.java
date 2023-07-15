@@ -53,12 +53,12 @@ public class Player {
     private int elo;
 
     @Column(name = "is_in_tournament")
-    private boolean IsInTournament;
+    private boolean isInTournament;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     private List<Game> games;
 
-    @ManyToMany
+    @OneToMany
     private List<Tournament> tournaments;
 }
 

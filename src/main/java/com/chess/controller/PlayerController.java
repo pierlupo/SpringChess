@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/player")
@@ -39,7 +41,7 @@ public class PlayerController {
 //        return null;
 //    }
         if (playerService.signIn(userName, password)) {
-            response.sendRedirect("/player/form");
+            response.sendRedirect("/player");
         }
             ModelAndView mv = new ModelAndView("signin");
             return mv;
@@ -71,15 +73,52 @@ public class PlayerController {
         return mv;
     }
 
-
-
-    @GetMapping("/get")
-    public ModelAndView get() throws NotSignedInException {
-        ModelAndView mv = new ModelAndView("home");
-        mv.addObject("players", playerService.getPlayers());
+    @GetMapping("/home")
+    public ModelAndView DisplayHome() {
+        List<Player> players = new ArrayList<>();
+        ModelAndView mv =new ModelAndView("home");
+        mv.addObject("player", players);
         return mv;
     }
 
+    @GetMapping("/{id}")
+    public Player getPlayerById(@PathVariable Integer id) throws NotSignedInException {
+        List<Player> players = playerService.getPlayers();
+        Player player = new Player();
+        for (Player p : players) {
+            if (p.getId() == id) {
+                player = p;
+            }
+        }
+        return player;
+    }
+    @GetMapping("/all")
+    public List<Player> getAllPlayers() throws IOException, NotSignedInException {
+        if(!loginservice.isLogged()) {
+            response.sendRedirect("/player/signin");
+        }
+        List<Player> players = playerService.getPlayers();
+        return players;
+    }
+    @GetMapping("{isInTournament}")
+    public List<Player> get(@PathVariable boolean isInTournament) {
+
+        return playerService.getByIsInTournament(isInTournament);
+    }
+    @GetMapping(value = {"","{isInTournament}"})
+    public ModelAndView getAllPlayers(@PathVariable(required = false) Boolean isInTournament) {
+        ModelAndView mv = new ModelAndView("home");
+        List<Player> players = new ArrayList<>();
+        if(isInTournament == null) {
+            players.addAll(playerService.getByIsInTournament(false));
+            players.addAll(playerService.getByIsInTournament(true));
+        }
+        else {
+            players.addAll(playerService.getByIsInTournament(isInTournament));
+        }
+        mv.addObject("players", players);
+        return mv;
+    }
     @GetMapping("/add")
     public ModelAndView formAddPlayer() throws IOException {
         if(!loginservice.isLogged()) {
@@ -141,7 +180,7 @@ public class PlayerController {
     }
 
     @GetMapping("/search")
-    public String searchTodoById(@RequestParam("playerId") Integer playerId, Model model) throws IOException, NotSignedInException, PlayerDoesNotExistException {
+    public String searchPlayerById(@RequestParam("playerId") Integer playerId, Model model) throws IOException, NotSignedInException, PlayerDoesNotExistException {
         Player player = playerService.getPlayerById(playerId);
         model.addAttribute("player", player);
         return "playerdetails";

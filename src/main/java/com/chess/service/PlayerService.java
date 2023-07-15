@@ -115,4 +115,9 @@ public class PlayerService {
         }
         throw new NotSignedInException();
     }
+
+    public List<Player> getByIsInTournament(boolean isInTournament) {
+
+        return playerRepository.findByIsInTournament(isInTournament);
+    }
 }

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head th:insert="~{fragments/head.html :: head}">
     <meta charset="UTF-8">
     <title>Profile</title>
-    <head th:insert="~{fragments/head.html :: head}"></head>
 </head>
 <body>
 <header th:insert="~{fragments/header.html :: header}"></header>
 <div class="containerDetails">
     <div class="detailBox">
-        <div class="headerBox" th:text="${player?.nickName}">
+        <div class="headerBox" th:text="${player?.userName}">
             <hr>
         </div>
         <div class="card-body">
@@ -20,10 +19,10 @@
             <p th:text="${player?.pat}"></p>
             <p th:text="${player?.nbrOfGames}"></p>
             <p th:text="${player?.Elo}"></p>
-            <h3 class="IsInTournament" th:text="${player?.IsInTournament == false  ? 'Not registered' : 'registered'}" th:class="${player.IsInTournament == false} ? 'red' : 'green'"></h3>
+<!--            <h3 class="IsInTournament" th:text="${player?.IsInTournament == false  ? 'Not registered' : 'registered'}" th:class="${player.IsInTournament == false} ? 'red' : 'green'"></h3>-->
         </div>
         <div class="divChangeIsInTournament">
-            <a class="changeIsInTournament" th:href="@{/player/update/{id}(id=${player.getId()})}">Change registration</a>
+            <a class="changeIsInTournament" th:href="@{/player/update/{id}(id=${player.getId()})}"> registrate</a>
         </div>
         <a href="#" class="linkBack" th:href="${'/player'}">Retour</a>
     </div>

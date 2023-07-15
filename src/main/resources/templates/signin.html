@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="https://www.thymeleaf.org">
-<head>
+<head th:insert="~{fragments/head.html :: head}">
     <meta charset="UTF-8">
     <title>Sign In</title>
-    <head th:insert="~{fragments/head.html :: head}"></head>
 </head>
 <body>
 <header th:insert="~{fragments/header.html :: header}"></header>
@@ -12,14 +11,13 @@
     <div class="shape"></div>
     <div class="shape"></div>
 </div>
-<form th:action="@{/player/signin}" method="post">
+<form class="signinForm" th:action="@{/player/signin}" method="post">
     <div th:if="${message != null}" class="messageContainer">
         <div class="messageText">
             <div th:text="${message}"></div>
         </div>
     </div>
-    <h3>Login Here</h3>
-
+    <h3>Login</h3>
     <label for="userName">
     <input c type="text" name="userName" placeholder="Username" id="userName">
     </label>
@@ -27,28 +25,6 @@
     <input type="password" name="password" placeholder="Password" id="password">
     </label>
     <button class="buttonLogin">Log In</button>
-
 </form>
-<!--<form th:action="@{/player/signin}" method="post" class="loginForm">-->
-<!--    <div th:if="${message != null}" class="messageContainer">-->
-<!--        <div class="messageText">-->
-<!--            <div th:text="${message}"></div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="">-->
-<!--            <label class="labelForm" for="userName">-->
-<!--            <input type="text" name="userName" placeholder="Username" id="userName" class="inputlog"/>-->
-<!--            </label>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--            <label class="labelForm" for="password">-->
-<!--            <input type="password" name="password" placeholder="Password" id="password" class="inputlog"/>-->
-<!--            </label>-->
-<!--    </div>-->
-<!--        <div>-->
-<!--            <button class="btn btnlog">valider</button>-->
-<!--        </div>-->
-<!--    </div>-->
-
 </body>
 </html>

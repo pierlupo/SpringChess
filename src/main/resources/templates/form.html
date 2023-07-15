@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Result Form</title>
-  <head th:insert="~{fragments/head.html :: head}"></head>
+<head th:insert="~{fragments/head.html :: head}">
+  <meta charset="UTF-8">
+  <title>Stats Form</title>
 </head>
 <body>
 <header th:insert="~{fragments/header.html :: header}"></header>
@@ -12,7 +11,7 @@
   <div class="shape"></div>
 </div>
 <div class="formContainer">
-  <form th:action="@{/player/submitAddPlayer}" method="post" enctype="multipart/form-data" th:object="${player}">
+  <form  class = "formStat" th:action="@{/player/submitAddPlayer}" method="post" enctype="multipart/form-data" th:object="${player}">
     <div class="formul">
 
       <label class="labelForm" for="userName">Username

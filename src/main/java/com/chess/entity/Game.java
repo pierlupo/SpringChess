@@ -32,8 +32,9 @@ public class Game {
     @Column(name = "winner")
     private String winner;
 
-    @ManyToMany
-    private List <Player> players;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player player;
 
     @ManyToMany
     private List<Tournament> tournaments;

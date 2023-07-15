@@ -1,8 +1,11 @@
 package com.chess.repository;
 
 import com.chess.entity.Player;
+import org.hibernate.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 @Repository
@@ -20,4 +23,6 @@ public interface PlayerRepository extends CrudRepository<Player, Integer> {
     public boolean existsBynbrOfGames(int nbrOfGames);
 
     public Player deleteById(int id);
+
+    public List<Player> findByIsInTournament(boolean isInTournament);
 }
