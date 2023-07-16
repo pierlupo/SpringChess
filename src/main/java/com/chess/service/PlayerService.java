@@ -56,7 +56,27 @@ public class PlayerService {
         throw new NotSignedInException();
     }
 
-
+    public boolean updatePlayer(String firstName, String lastName, String userName, String email, String password) throws  EmptyFieldsException, NotSignedInException, PlayerDoesNotExistException
+    {
+        if(loginService.isLogged()) {
+            if(userName != null) {
+                try {
+                    Player player = playerRepository.findByUserName(userName);
+                    player.setUserName(firstName);
+                    player.setLastName(lastName);
+                    player.setUserName(userName);
+                    player.setEmail(email);
+                    player.setPassword(password);
+                    playerRepository.save(player);
+                    return true;
+                }catch (Exception ex) {
+                    throw new PlayerDoesNotExistException();
+                }
+            }
+            throw EmptyFieldsException.with("firstName", "lastName","userName", "email", "password");
+        }
+        throw new NotSignedInException();
+    }
 
     public boolean updatePlayerStats(String userName, int victory, int defeat, int pat, int nbrOfGames, int Elo) throws  EmptyFieldsException, NotSignedInException, PlayerDoesNotExistException
     {

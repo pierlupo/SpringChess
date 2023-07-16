@@ -151,9 +151,10 @@ public class PlayerController {
         ModelAndView mv = new ModelAndView("form");
         mv.addObject("player", playerService.getPlayerById(id));
         return mv;
+
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("/editstats/{id}")
     public String submitFormEditPlayer(@RequestParam String userName, @RequestParam int victory, @RequestParam int defeat, @RequestParam int pat, @RequestParam int nbrOfGames, @RequestParam int Elo) throws NotSignedInException, PlayerDoesNotExistException, EmptyFieldsException, PlayerExistsException, IOException {
         if(!loginservice.isLogged()) {
             response.sendRedirect("/player/signin");
@@ -191,6 +192,13 @@ public class PlayerController {
     @ExceptionHandler(NotSignedInException.class)
     public ModelAndView handleException(NotSignedInException ex) {
         ModelAndView mv = new ModelAndView("signin");
+        mv.addObject("errormessage", ex.getMessage());
+        return mv;
+    }
+
+    @ExceptionHandler(NoPlayerWithThisIdException.class)
+    public ModelAndView handleException(NoPlayerWithThisIdException ex) {
+        ModelAndView mv = new ModelAndView("home");
         mv.addObject("errormessage", ex.getMessage());
         return mv;
     }

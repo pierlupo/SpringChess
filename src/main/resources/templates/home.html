@@ -10,6 +10,11 @@
 <!--<div class="conteneur">-->
     <div class="shapeHome shapeHome1"></div>
     <div class="shapeHome shapeHome2"></div>
+<div th:if="${message != null}" class="messageContainer">
+    <div class="messageText">
+        <div th:text="${message}"></div>
+    </div>
+</div>
     <table class = "table1" >
         <thead>
         <tr>
@@ -49,11 +54,6 @@
     </table>
     <div class="searchConteneur">
     <form class="searchForm" th:action="@{/player/search}" method="get">
-        <div th:if="${message != null}" class="messageContainer">
-            <div class="messageText">
-                <div th:text="${message}"></div>
-            </div>
-        </div>
         <h3>Search for a player</h3>
         <label>
             <input type="text" name="playerId" placeholder="Enter an ID">
