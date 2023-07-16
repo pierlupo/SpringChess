@@ -16,6 +16,7 @@
       <div th:text="${message}"></div>
     </div>
   </div>
+  <h3>Sign up</h3>
   <div class="">
     <label class="labelForm" for="firstname">
     <input type="text" name="firstName" placeholder="Firstname" id="firstname" class="inputlog">
@@ -44,5 +45,6 @@
   <button class="btn btnlog">valider</button>
   </div>
 </form>
+<footer th:insert="~{fragments/footer.html :: footer}"></footer>
 </body>
 </html>

@@ -106,7 +106,10 @@ public class PlayerController {
         return playerService.getByIsInTournament(isInTournament);
     }
     @GetMapping(value = {"","{isInTournament}"})
-    public ModelAndView getAllPlayers(@PathVariable(required = false) Boolean isInTournament) {
+    public ModelAndView getAllPlayers(@PathVariable(required = false) Boolean isInTournament) throws NotSignedInException, IOException {
+        if(!loginservice.isLogged()) {
+            response.sendRedirect("/player/signin");
+        }
         ModelAndView mv = new ModelAndView("home");
         List<Player> players = new ArrayList<>();
         if(isInTournament == null) {
